@@ -20,7 +20,7 @@ def scrape_CER(url):
 
     time.sleep(2)
 
-    for i in range(0,1000):
+    for i in range(0,10000):
         try:
             elem = driver.find_element_by_xpath('/html/body/div/div/section[1]/div/div/div/div/section/div[2]/div/div/div[2]/div[2]/table/tbody//tr[' + str(i) + ']/td[1]/a')
             links.append(elem.get_attribute('href'))
@@ -44,12 +44,6 @@ def scrape_CER(url):
 
     print("done")
     time.sleep(2)
-
-    print(len(cola))
-    print(len(colb))
-    print(len(colc))
-    print(len(cold))
-    
     
     df = pd.DataFrame()
     df['link']  = cola
@@ -75,4 +69,4 @@ urls = ['http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/eukaryota/Schi_pomb_972h/Schi_
 for url in urls:
     df = df.append(scrape_CER(url))
     
-df.to_excel('Yeast tRNA Scrape.xlsx')
+df.to_excel('tRNA Database Scraper.xlsx')
