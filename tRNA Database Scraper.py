@@ -63,14 +63,14 @@ driver = webdriver.Chrome('./chromedriver')
 df = pd.DataFrame(columns=['link', 'up down', 'gen seq','predic mature'])
 
 
-urls = ['http://gtrnadb.ucsc.edu/genomes/eukaryota/Scere3/Scere3-gene-list.html',
+urls = ['http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/eukaryota/Schi_pomb_972h/Schi_pomb_972h-gene-list.html',
+'http://gtrnadb.ucsc.edu/genomes/eukaryota/Scere3/Scere3-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Celeg11/Celeg11-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Dmela6/Dmela6-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Athal10/Athal10-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Mmusc10/Mmusc10-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Hsapi19/Hsapi19-displayed-gene-list.html']
 
-#urls = ['http://gtrnadb.ucsc.edu/genomes/eukaryota/Scere3/Scere3-gene-list.html']
 
 for url in urls:
     df = df.append(scrape_CER(url))
