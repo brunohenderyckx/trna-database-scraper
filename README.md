@@ -12,6 +12,6 @@ Python needs to be installed, packages dependencies are pandas & selenium.
 From https://www.selenium.dev/documentation/webdriver/, download the latest webdriver compatable with your local machine browser and save that to the same folder as the script.
 
 ## How to execute
-Add the URLs that you want to scrape to the URL list
-Change the name of the Output excel file
+Add the URLs that you want to scrape to the URL list. 
+Change the name of the Output excel file. 
 Run the script
