@@ -24,7 +24,7 @@ To use Selenium, download the latest webdriver compatable with your local machin
 # Installation Guide:
 ### Install from Github
 ```
-git clone [https://github.com/neurodata/mgcpy](https://github.com/brunohenderyckx/trna-database-scraper)
+git clone https://github.com/brunohenderyckx/trna-database-scraper
 cd trna-database-scraper
 python3 setup.py install
 ```
