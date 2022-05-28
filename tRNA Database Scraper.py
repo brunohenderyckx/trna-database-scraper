@@ -6,6 +6,10 @@ import time
 
 
 def scrape_CER(url):
+    """
+    Function that takes in a gtrnadb URL listing genes, looping over them and extracting key information (e.g. Upstream / Downstream Sequence)
+    """
+    # Opens Selenium webdriver
     driver.get(url)
     links = []
     cola = []
@@ -20,6 +24,7 @@ def scrape_CER(url):
 
     time.sleep(2)
 
+    # for every gene on the page, get the links for scraping purposes
     for i in range(0,10000):
         try:
             elem = driver.find_element_by_xpath('/html/body/div/div/section[1]/div/div/div/div/section/div[2]/div/div/div[2]/div[2]/table/tbody//tr[' + str(i) + ']/td[1]/a')
@@ -45,18 +50,20 @@ def scrape_CER(url):
     print("done")
     time.sleep(2)
     
+    # Create a dataframe with all the scraped data
     df = pd.DataFrame()
     df['link']  = cola
     df['up down'] = colb
     df['gen seq'] = colc
     df['predic mature'] = cold
 
+    # Return the dataframe to save as an excel
     return df
 
 driver = webdriver.Chrome('./chromedriver')
 df = pd.DataFrame(columns=['link', 'up down', 'gen seq','predic mature'])
 
-
+# Add the URLs you want to scrape to this list
 urls = ['http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/eukaryota/Schi_pomb_972h/Schi_pomb_972h-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Scere3/Scere3-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Celeg11/Celeg11-displayed-gene-list.html',
@@ -65,8 +72,9 @@ urls = ['http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/eukaryota/Schi_pomb_972h/Schi_
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Mmusc10/Mmusc10-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Hsapi19/Hsapi19-displayed-gene-list.html']
 
-
+# Loops over the URLs you added and scrapes the information from them
 for url in urls:
     df = df.append(scrape_CER(url))
-    
+
+# Saves the scraped data to an excel file
 df.to_excel('tRNA Database Scraper.xlsx')
