@@ -25,8 +25,6 @@ To use Selenium, download the latest webdriver compatable with your local machin
 ### Install from Github
 ```
 git clone https://github.com/brunohenderyckx/trna-database-scraper
-cd trna-database-scraper
-python3 setup.py install
 ```
 - `sudo`, if required
 
