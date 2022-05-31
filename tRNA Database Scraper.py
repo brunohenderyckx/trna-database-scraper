@@ -11,6 +11,8 @@ def scrape_CER(url):
     """
     # Opens Selenium webdriver
     driver.get(url)
+    
+    # Creates empty lists to popualte with the scrape outputs
     links = []
     cola = []
     colb = []
@@ -27,12 +29,14 @@ def scrape_CER(url):
     # for every gene on the page, get the links for scraping purposes
     for i in range(0,10000):
         try:
+            # pulls the URLs from the table, to then access
             elem = driver.find_element_by_xpath('/html/body/div/div/section[1]/div/div/div/div/section/div[2]/div/div/div[2]/div[2]/table/tbody//tr[' + str(i) + ']/td[1]/a')
             links.append(elem.get_attribute('href'))
 
         except:
             continue
 
+    # accesses every link stored in the list and extracts the information we want
     for link in links:
         driver.get(link)
         cola.append(link)
@@ -60,19 +64,21 @@ def scrape_CER(url):
     # Return the dataframe to save as an excel
     return df
 
+# Creates a Selenium webdriver instance that we'll control later
 driver = webdriver.Chrome('./chromedriver')
+
+# Creates an empty pandas dataframe, that we'll populate after the scraping is completed
 df = pd.DataFrame(columns=['link', 'up down', 'gen seq','predic mature'])
 
 # Add the URLs you want to scrape to this list
 urls = ['http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/eukaryota/Schi_pomb_972h/Schi_pomb_972h-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Scere3/Scere3-gene-list.html',
-'http://gtrnadb.ucsc.edu/genomes/eukaryota/Celeg11/Celeg11-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Dmela6/Dmela6-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Athal10/Athal10-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Mmusc10/Mmusc10-displayed-gene-list.html',
 'http://gtrnadb.ucsc.edu/genomes/eukaryota/Hsapi19/Hsapi19-displayed-gene-list.html']
 
-# Loops over the URLs you added and scrapes the information from them
+# Loops over the URLs you added and scrapes the information from them by executing the scrape_CER function
 for url in urls:
     df = df.append(scrape_CER(url))
 
